@@ -8,15 +8,32 @@
 
 body{
 margin:0;
-padding:0;
-font-family: "Georgia", serif;
-background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+font-family:Georgia,serif;
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
 overflow-x:hidden;
 }
 
-/* BOTON INICIAL */
+/* ESTRELLAS */
 
-.start{
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(white 1px, transparent 1px);
+background-size:40px 40px;
+opacity:0.3;
+animation:starsMove 60s linear infinite;
+}
+
+@keyframes starsMove{
+from{transform:translateY(0)}
+to{transform:translateY(-200px)}
+}
+
+/* SOBRE */
+
+.envelopeContainer{
 height:100vh;
 display:flex;
 justify-content:center;
@@ -24,20 +41,31 @@ align-items:center;
 flex-direction:column;
 }
 
-button{
-padding:18px 40px;
-font-size:22px;
-border:none;
-border-radius:40px;
+.envelope{
+width:200px;
+height:140px;
 background:#c2185b;
-color:white;
+position:relative;
 cursor:pointer;
-box-shadow:0 0 20px rgba(194,24,91,0.7);
-transition:0.3s;
+border-radius:6px;
 }
 
-button:hover{
-transform:scale(1.1);
+.envelope:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:0;
+height:0;
+border-left:100px solid transparent;
+border-right:100px solid transparent;
+border-top:70px solid #e91e63;
+transform-origin:top;
+transition:1s;
+}
+
+.envelope.open:before{
+transform:rotateX(180deg);
 }
 
 /* CARTA */
@@ -45,26 +73,33 @@ transform:scale(1.1);
 .carta{
 display:none;
 max-width:750px;
-margin:auto;
-margin-top:60px;
+margin:80px auto;
 background:white;
 padding:50px;
 border-radius:20px;
 box-shadow:0 20px 40px rgba(0,0,0,0.3);
 text-align:center;
-animation: aparecer 2s ease;
+animation:aparecer 2s;
 }
 
+@keyframes aparecer{
+from{opacity:0; transform:translateY(40px)}
+to{opacity:1}
+}
+
+/* TITULO */
+
 h1{
-font-size:40px;
+font-size:38px;
 color:#ff2e7a;
+margin-bottom:30px;
 text-shadow:
-0 0 5px #ff2e7a,
 0 0 10px #ff2e7a,
 0 0 20px #ff2e7a,
 0 0 40px #ff2e7a;
-animation: neon 2s ease-in-out;
 }
+
+/* TEXTO */
 
 p{
 font-size:20px;
@@ -80,44 +115,19 @@ font-weight:bold;
 margin-top:30px;
 }
 
-/* NEON */
+/* FLORES */
 
-@keyframes neon{
-0%{
-opacity:0;
-text-shadow:none;
-}
-100%{
-opacity:1;
-}
-}
-
-/* APARECER */
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:translateY(50px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* ROSAS Y PETALOS */
-
-.falling{
+.flor{
 position:fixed;
 top:-50px;
-font-size:25px;
-animation:fall linear infinite;
-opacity:0.8;
+font-size:24px;
+animation:caer linear infinite;
+opacity:0.9;
 }
 
-@keyframes fall{
+@keyframes caer{
 to{
-transform:translateY(110vh);
+transform:translateY(110vh) rotate(360deg);
 }
 }
 
@@ -126,13 +136,18 @@ transform:translateY(110vh);
 
 <body>
 
-<div class="start">
-<button onclick="abrirCarta()">💌 Abrir mi carta</button>
+<div class="stars"></div>
+
+<div class="envelopeContainer" id="inicio">
+
+<div class="envelope" onclick="abrirCarta()" id="sobre"></div>
+<p style="margin-top:20px;font-size:20px;">💌 Toca el sobre para abrir la carta</p>
+
 </div>
 
 <div class="carta" id="carta">
 
-<h1>Feliz Día de la Mujer 🌹</h1>
+<h1 id="titulo">Feliz Día de la Mujer 🌹</h1>
 
 <p>
 Hoy quiero aprovechar este día para recordarte algo que tal vez no te digo lo suficiente: lo increíble que eres.
@@ -169,38 +184,64 @@ Feliz Día de la Mujer, mi amor. ❤️✨
   <P><STRONG>JUAN KALETH MENDOZA PRIMERA </STRONG></P>
 </div>
 
+</div>
+
 <script>
 
+/* ABRIR SOBRE */
+
 function abrirCarta(){
-document.querySelector(".start").style.display="none";
-document.querySelector(".carta").style.display="block";
+
+document.getElementById("sobre").classList.add("open");
+
+setTimeout(()=>{
+document.getElementById("inicio").style.display="none";
+document.getElementById("carta").style.display="block";
+escribirTitulo();
+},900)
+
 }
 
-/* GENERAR ROSAS Y PETALOS */
+/* TITULO CINE */
+
+const texto="Feliz Día de la Mujer 🌹";
+let i=0;
+
+function escribirTitulo(){
+
+const titulo=document.getElementById("titulo");
+
+if(i<texto.length){
+titulo.innerHTML+=texto.charAt(i);
+i++;
+setTimeout(escribirTitulo,80);
+}
+
+}
+
+/* ROSAS Y PETALOS */
 
 function crearFlor(){
 
 const flor=document.createElement("div");
 
-const flores=["🌹","🌸","🌺","💮"];
+const flores=["🌹","🌸"];
 
 flor.innerHTML=flores[Math.floor(Math.random()*flores.length)];
 
-flor.classList.add("falling");
+flor.classList.add("flor");
 
 flor.style.left=Math.random()*100+"vw";
 
-flor.style.animationDuration=(5+Math.random()*5)+"s";
+flor.style.animationDuration=(6+Math.random()*5)+"s";
 
 document.body.appendChild(flor);
 
-setTimeout(()=>{
-flor.remove();
-},10000);
+setTimeout(()=>{flor.remove()},11000);
 
 }
 
-setInterval(crearFlor,500);
+setInterval(crearFlor,400);
 
 </script>
 
