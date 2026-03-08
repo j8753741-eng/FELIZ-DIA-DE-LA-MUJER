@@ -7,80 +7,118 @@
 <style>
 
 body{
-    margin:0;
-    padding:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family: "Georgia", serif;
-    background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+margin:0;
+padding:0;
+font-family: "Georgia", serif;
+background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+overflow-x:hidden;
+}
+
+/* BOTON INICIAL */
+
+.start{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+button{
+padding:18px 40px;
+font-size:22px;
+border:none;
+border-radius:40px;
+background:#c2185b;
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px rgba(194,24,91,0.7);
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
 }
 
 /* CARTA */
+
 .carta{
-    width: 80%;
-    max-width: 700px;
-    background:white;
-    padding:50px;
-    border-radius:20px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.2);
-    text-align:center;
-    position:relative;
-    animation: aparecer 2s ease;
+display:none;
+max-width:750px;
+margin:auto;
+margin-top:60px;
+background:white;
+padding:50px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+text-align:center;
+animation: aparecer 2s ease;
 }
 
-/* DECORACIÓN FLOR */
-.carta::before{
-    content:"🌹";
-    position:absolute;
-    top:-20px;
-    left:-20px;
-    font-size:40px;
-}
-
-.carta::after{
-    content:"🌸";
-    position:absolute;
-    bottom:-20px;
-    right:-20px;
-    font-size:40px;
-}
-
-/* TITULO */
 h1{
-    color:#c2185b;
-    font-size:38px;
-    margin-bottom:30px;
-    text-shadow:0 0 10px rgba(194,24,91,0.4);
+font-size:40px;
+color:#ff2e7a;
+text-shadow:
+0 0 5px #ff2e7a,
+0 0 10px #ff2e7a,
+0 0 20px #ff2e7a,
+0 0 40px #ff2e7a;
+animation: neon 2s ease-in-out;
 }
 
-/* TEXTO */
 p{
-    font-size:20px;
-    color:#444;
-    line-height:1.7;
-    margin-bottom:18px;
+font-size:20px;
+color:#444;
+line-height:1.8;
+margin:20px 0;
 }
 
-/* FIRMA */
-.firma{
-    margin-top:30px;
-    font-size:22px;
-    color:#b71c1c;
-    font-weight:bold;
+.final{
+font-size:24px;
+color:#b71c1c;
+font-weight:bold;
+margin-top:30px;
 }
 
-/* ANIMACION */
+/* NEON */
+
+@keyframes neon{
+0%{
+opacity:0;
+text-shadow:none;
+}
+100%{
+opacity:1;
+}
+}
+
+/* APARECER */
+
 @keyframes aparecer{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ROSAS Y PETALOS */
+
+.falling{
+position:fixed;
+top:-50px;
+font-size:25px;
+animation:fall linear infinite;
+opacity:0.8;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
 }
 
 </style>
@@ -88,7 +126,11 @@ p{
 
 <body>
 
-<div class="carta">
+<div class="start">
+<button onclick="abrirCarta()">💌 Abrir mi carta</button>
+</div>
+
+<div class="carta" id="carta">
 
 <h1>Feliz Día de la Mujer 🌹</h1>
 
@@ -97,22 +139,69 @@ Hoy quiero aprovechar este día para recordarte algo que tal vez no te digo lo s
 </p>
 
 <p>
-Feliz Día de la Mujer, mi amor. No solo porque hoy lo diga el calendario, sino porque cada día me siento afortunado de tener a una mujer tan especial en mi vida. Eres fuerte, inteligente, hermosa y tienes una forma única de hacer que todo a tu alrededor sea más bonito.
+Feliz Día de la Mujer, mi amor. 💐 No solo porque hoy lo diga el calendario, sino porque cada día me siento afortunado de tener a una mujer tan especial en mi vida. Eres fuerte, inteligente, hermosa y tienes una forma única de hacer que todo a tu alrededor sea más bonito.
 </p>
 
 <p>
-Admiro tu forma de ser, tu corazón, tu manera de luchar por lo que quieres y la luz que llevas dentro. Gracias por existir, por ser tú y por dejarme ser parte de tu vida.
+Admiro tu forma de ser, tu corazón, tu manera de luchar por lo que quieres y la luz que llevas dentro. Desde que llegaste, muchas cosas en mi vida cambiaron para bien. Mi mundo se volvió más bonito, más alegre y mucho más lleno de amor.
 </p>
 
 <p>
-Hoy celebro a la mujer maravillosa que eres… pero también celebro el privilegio de amarte.
+Eres una mujer maravillosa, de esas que dejan huella, de esas que inspiran, de esas que hacen que uno se sienta orgulloso simplemente de poder decir: “ella es mi novia”. Y créeme, para mí eso significa muchísimo.
 </p>
 
-<p class="firma">
-Te quiero muchísimo. ❤️🌹
+<p>
+Gracias por tu cariño, por tu forma de cuidar, por tu sonrisa que puede alegrarme incluso en los días más difíciles. Contigo aprendí que el amor también se encuentra en los pequeños momentos: en una conversación, en una risa compartida o simplemente en saber que estás ahí.
+</p>
+
+<p>
+Hoy quiero recordarte algo que nunca debes olvidar: eres valiosa, eres fuerte, eres única y eres profundamente especial. Y si el mundo alguna vez se olvida de decírtelo, yo voy a estar ahí para recordártelo todas las veces que haga falta.
+</p>
+
+<p>
+Hoy se celebra a las mujeres increíbles… pero yo también celebro el privilegio de amarte y de tenerte en mi vida.
+</p>
+
+<p class="final">
+Feliz Día de la Mujer, mi amor. ❤️✨
 </p>
 
 </div>
+
+<script>
+
+function abrirCarta(){
+document.querySelector(".start").style.display="none";
+document.querySelector(".carta").style.display="block";
+}
+
+/* GENERAR ROSAS Y PETALOS */
+
+function crearFlor(){
+
+const flor=document.createElement("div");
+
+const flores=["🌹","🌸","🌺","💮"];
+
+flor.innerHTML=flores[Math.floor(Math.random()*flores.length)];
+
+flor.classList.add("falling");
+
+flor.style.left=Math.random()*100+"vw";
+
+flor.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(flor);
+
+setTimeout(()=>{
+flor.remove();
+},10000);
+
+}
+
+setInterval(crearFlor,500);
+
+</script>
 
 </body>
 </html>
