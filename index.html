@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Día de la Mujer</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: "Georgia", serif;
+    background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+}
+
+/* CARTA */
+.carta{
+    width: 80%;
+    max-width: 700px;
+    background:white;
+    padding:50px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    text-align:center;
+    position:relative;
+    animation: aparecer 2s ease;
+}
+
+/* DECORACIÓN FLOR */
+.carta::before{
+    content:"🌹";
+    position:absolute;
+    top:-20px;
+    left:-20px;
+    font-size:40px;
+}
+
+.carta::after{
+    content:"🌸";
+    position:absolute;
+    bottom:-20px;
+    right:-20px;
+    font-size:40px;
+}
+
+/* TITULO */
+h1{
+    color:#c2185b;
+    font-size:38px;
+    margin-bottom:30px;
+    text-shadow:0 0 10px rgba(194,24,91,0.4);
+}
+
+/* TEXTO */
+p{
+    font-size:20px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+/* FIRMA */
+.firma{
+    margin-top:30px;
+    font-size:22px;
+    color:#b71c1c;
+    font-weight:bold;
+}
+
+/* ANIMACION */
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="carta">
+
+<h1>Feliz Día de la Mujer 🌹</h1>
+
+<p>
+Hoy quiero aprovechar este día para recordarte algo que tal vez no te digo lo suficiente: lo increíble que eres.
+</p>
+
+<p>
+Feliz Día de la Mujer, mi amor. No solo porque hoy lo diga el calendario, sino porque cada día me siento afortunado de tener a una mujer tan especial en mi vida. Eres fuerte, inteligente, hermosa y tienes una forma única de hacer que todo a tu alrededor sea más bonito.
+</p>
+
+<p>
+Admiro tu forma de ser, tu corazón, tu manera de luchar por lo que quieres y la luz que llevas dentro. Gracias por existir, por ser tú y por dejarme ser parte de tu vida.
+</p>
+
+<p>
+Hoy celebro a la mujer maravillosa que eres… pero también celebro el privilegio de amarte.
+</p>
+
+<p class="firma">
+Te quiero muchísimo. ❤️🌹
+</p>
+
+</div>
+
+</body>
+</html>
